@@ -11,11 +11,11 @@ public class BinarySearch {
         int notFoundNumber = random.nextInt(20);
 
         int[] tab = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        System.out.println(search(tab, 7));
+        // System.out.println(search(tab, 7));
 
         System.out.println("Szukam " + notFoundNumber);
 
-        int indeks = search(tab, notFoundNumber);
+        int indeks = searchRek(tab, notFoundNumber, 0, tab.length - 1);
         if (indeks == -1) {
             System.out.println("Nie znaleziono elementu " + notFoundNumber+ " w tablicy " + Arrays.toString(tab));
         } else {
@@ -49,6 +49,28 @@ public class BinarySearch {
         }
 
         return -1;
+
+    }
+
+    private static int searchRek(int[] tab, int searchNumber, int left, int right) {
+
+        if (left > right) {
+            return -1;
+        }
+
+        int srodek = (left + right) / 2;
+
+        if (tab[srodek] == searchNumber) {
+            return srodek;
+        }
+
+        if (tab[srodek] > searchNumber) {
+            right = srodek - 1;
+        } else {
+            left = srodek + 1;
+        }
+
+        return searchRek(tab, searchNumber, left, right);
 
     }
 }
